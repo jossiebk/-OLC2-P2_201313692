@@ -1,0 +1,169 @@
+inicio-> inicio bloque
+        |bloque
+
+
+bloque-> funciones
+        | structs
+        | instrucciones
+
+
+
+structs-> struct ID { lista_definiciones}
+
+instrucciones-> instrucciones instruccion
+                | instruccion
+
+instruccion-> imprimir;
+                | if_instr
+                | manejo_datos ;
+                | for_instr
+                | while_instr
+                | switch_instr
+                | break ;
+                | continue ;
+                | return ;
+                | return expresion ;
+                | instancia ; 
+
+if_instr-> IF ( expresion ) { instrucciones }
+            | IF ( expresion ) { instrucciones } else { instrucciones }
+            | IF ( expresion ) { instrucciones } else IF { instrucciones }
+
+while_instr -> while (expresion) {instrucciones}
+                | do {instrucciones} while (expresion)
+
+switch_instr -> switch (expresion){ casos estandar }
+
+casos -> casos caso
+        | caso
+
+caso -> case expresion : instrucciones
+
+estandar -> default : instrucciones
+
+
+
+for_instr -> for (manejo_datos ; expresion ; aumento){instrucciones}
+
+aumento -> ID ++
+            | ID --
+
+manejo_datos ->  tipo definicion
+                | asignacion
+
+
+definicion-> definicion , lista_definiciones 
+            | lista_definiciones
+
+
+----------------------------------------------------------------------------------------
+lista_definiciones->  llamada
+                    | & ID
+                    | * ID
+                    | ** ID
+                    | ID []
+                    | ID [ expresion ]
+                    | ID [][]
+                    | ID [ expresion ][ expresion ]
+                    | ID = resultado
+                    | & ID = resultado
+                    | * ID = resultado
+                    | ** ID = resultado
+                    | ID [] = resultado
+                    | ID [ expresion ] = resultado
+                    | ID [][] = resultado
+                    | ID [ expresion ][ expresion ] = resultado
+                    | llamada = llamada
+                    
+
+asignacion->          llamada = resultado
+                    | & ID = resultado
+                    | * ID = resultado
+                    | ** ID = resultado
+                    | ID [] = resultado
+                    | ID [ expresion ] = resultado
+                    | ID [][] = resultado
+                    | ID [ expresion ][ expresion ] = resultado
+                    | llamada = llamada
+
+
+resultado-> ID
+            | & ID
+            | * ID
+            | ** ID
+            | ID []
+            | ID [ expresion ]
+            | ID [][]
+            | ID [ expresion ][ expresion ]
+            | { lista_finales }
+            | expresion
+            | llamada
+            | llamada_metodo
+
+llamada -> llamada . ID
+        | ID
+
+llamada_metodo -> ID ()
+                | ID( parametros )
+
+parametros-> parametros , tipo ID 
+            | parametros , struct ID * ID
+            | parametros , struct ID ** ID
+            | parametros , ID
+            | parametros , expresion
+            | tipo ID 
+            | struct ID * ID
+            | struct ID ** ID
+            | ID
+            | expresion
+
+lista_finales -> lista_finales , expresion
+                | expresion
+
+
+funciones-> tipo ID () { instrucciones }
+           |tipo ID ( parametros ) { instrucciones }
+
+
+expresion->       expresion AND expresion
+                | expresion OR expresion
+                | expresion AND2 expresion
+                | expresion OR2 expresion
+                | expresion XOR2 expresion
+                | expresion IGUALIGUAL expresion
+                | expresion DIFERENTE expresion
+                | expresion MAYORIGUAL expresion
+                | expresion MENORIGUAL expresion
+                | expresion MAYOR expresion
+                | expresion MENOR expresion
+                | expresion DESPLAZAMIENTOIZQ expresion
+                | expresion DESPLAZAMIENTODER expresion
+                | expresion MAS expresion
+                | expresion MENOS expresion
+                | expresion POR expresion
+                | expresion DIV expresion
+                | expresion RESIDUO expresion
+
+                | UMENOS expresion
+                | NOT2 expresion
+                | NOT expresion
+                | expresion incremento
+                | expresion decremento
+                | ( expresion )
+
+                | ENTERO
+                | DECIMAL
+                | ID
+                | CADENA
+                | CARACTER
+
+precedence = (
+        ('left','AND','OR')
+        ('left','AND2','OR2','XOR2'),
+        ('left','IGUALIGUAL','DIFERENTE'),
+        ('left','MAYORIGUAL','MENORIGUAL','MAYOR','MENOR'),
+        ('left','DESPLAZAMIENTOIZQ','DESPLAZAMIENTODER')
+        ('left','MAS','MENOS'),
+        ('left','POR','DIV','RESIDUO'),
+        ('right','UMENOS', 'NOT2','NOT'),
+    )
