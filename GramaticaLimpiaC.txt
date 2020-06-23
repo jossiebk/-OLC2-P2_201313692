@@ -56,65 +56,50 @@ definicion-> definicion , lista_definiciones
             | lista_definiciones
 
 
-----------------------------------------------------------------------------------------
-lista_definiciones->  llamada
-                    | & ID
-                    | * ID
-                    | ** ID
-                    | ID []
-                    | ID [ expresion ]
-                    | ID [][]
-                    | ID [ expresion ][ expresion ]
-                    | ID = resultado
-                    | & ID = resultado
-                    | * ID = resultado
-                    | ** ID = resultado
-                    | ID [] = resultado
-                    | ID [ expresion ] = resultado
-                    | ID [][] = resultado
-                    | ID [ expresion ][ expresion ] = resultado
-                    | llamada = llamada
+
+lista_definiciones->  llamada   A
+                    | & llamada B
+                    | llamada []        C
+                    | llamada [ expresion ]     D 
+                    | llamada [][]      E
+                    | llamada [ expresion ][ expresion ]        F
+                    | llamada = resultado       G
+                    | & llamada = resultado     H
+                    | llamada [] = resultado    I
+                    | llamada [ expresion ] = resultado J
+                    | llamada [][] = resultado  K
+                    | llamada [ expresion ][ expresion ] = resultado    L
+                    
                     
 
 asignacion->          llamada = resultado
-                    | & ID = resultado
-                    | * ID = resultado
-                    | ** ID = resultado
-                    | ID [] = resultado
-                    | ID [ expresion ] = resultado
-                    | ID [][] = resultado
-                    | ID [ expresion ][ expresion ] = resultado
-                    | llamada = llamada
+                    | & llamada = resultado
+                    | llamada [] = resultado
+                    | llamada [ expresion ] = resultado
+                    | llamada [][] = resultado
+                    | llamada [ expresion ][ expresion ] = resultado
 
-
-resultado-> ID
-            | & ID
-            | * ID
-            | ** ID
-            | ID []
-            | ID [ expresion ]
-            | ID [][]
-            | ID [ expresion ][ expresion ]
+resultado->  & llamada
+            | llamada []
+            | llamada [ expresion ]
+            | llamada [][]
+            | llamada [ expresion ][ expresion ]
             | { lista_finales }
             | expresion
-            | llamada
             | llamada_metodo
 
-llamada -> llamada . ID
-        | ID
+
 
 llamada_metodo -> ID ()
                 | ID( parametros )
 
+
 parametros-> parametros , tipo ID 
-            | parametros , struct ID * ID
-            | parametros , struct ID ** ID
-            | parametros , ID
+            | parametros , & ID
             | parametros , expresion
             | tipo ID 
-            | struct ID * ID
-            | struct ID ** ID
             | ID
+            | & ID
             | expresion
 
 lista_finales -> lista_finales , expresion
@@ -123,6 +108,7 @@ lista_finales -> lista_finales , expresion
 
 funciones-> tipo ID () { instrucciones }
            |tipo ID ( parametros ) { instrucciones }
+
 
 
 expresion->       expresion AND expresion
@@ -143,27 +129,33 @@ expresion->       expresion AND expresion
                 | expresion POR expresion
                 | expresion DIV expresion
                 | expresion RESIDUO expresion
-
                 | UMENOS expresion
                 | NOT2 expresion
                 | NOT expresion
                 | expresion incremento
                 | expresion decremento
+                | incremento expresion
+                | decremento expresion    
                 | ( expresion )
 
                 | ENTERO
                 | DECIMAL
-                | ID
+                | llamada
                 | CADENA
                 | CARACTER
 
-precedence = (
-        ('left','AND','OR')
-        ('left','AND2','OR2','XOR2'),
-        ('left','IGUALIGUAL','DIFERENTE'),
-        ('left','MAYORIGUAL','MENORIGUAL','MAYOR','MENOR'),
-        ('left','DESPLAZAMIENTOIZQ','DESPLAZAMIENTODER')
-        ('left','MAS','MENOS'),
-        ('left','POR','DIV','RESIDUO'),
-        ('right','UMENOS', 'NOT2','NOT'),
-    )
+llamada -> llamada . ID
+        | ID
+
+igualacion           : IGUAL
+                     | MASIGUAL
+                     | MENOSIGUAL
+                     | DIVIDIDOIGUAL
+                     | PORIGUAL
+                     | RESIDUOIGUAL
+                     | DESPLAZAMIENTOIZQ2
+                     | DESPLAZAMIENTODER2
+                     | ANDIGUAL
+                     | XORIGUAL
+                     | ORIGUAL'''
+

@@ -299,16 +299,187 @@ def p_lista_definiciones2(t):
 def p_lista_definiciones3(t):
     'lista_definiciones2        : definicion'
 
-
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# METODOS PARA LA LSITA DE LAS DEFINICIONES
 def p_definicion(t):
     'definicion         : definicion COMA lista_definiciones'
 
 def p_definicion2(t):
     'definicion         : lista_definiciones'
 
-def p_lista_definiciones(t):
+def p_lista_definicionesA(t):
+    '''lista_definiciones       : llamada'''
+    
+def p_lista_definicionesB(t):
+    '''lista_definiciones       : AMPERSAN llamada'''
+
+def p_lista_definicionesC(t):
+    '''lista_definiciones       : llamada CORCHETEIZQ CORCHETEDER'''
+
+def p_lista_definicionesD(t):
+    '''lista_definiciones       : llamada CORCHETEIZQ expresion CORCHETEDER'''
+
+def p_lista_definicionesE(t):
+    '''lista_definiciones       : llamada CORCHETEIZQ CORCHETEDER CORCHETEIZQ CORCHETEDER'''
+
+def p_lista_definicionesF(t):
+    '''lista_definiciones       : llamada CORCHETEIZQ expresion CORCHETEDER CORCHETEIZQ expresion CORCHETEDER'''
+
+def p_lista_definicionesG(t):
+    '''lista_definiciones       : llamada igualacion resultado'''
+
+def p_lista_definicionesH(t):
+    '''lista_definiciones       : AMPERSAN llamada igualacion RESULTADO'''
+
+def p_lista_definicionesI(t):
+    '''lista_definiciones       : llamada CORCHETEIZQ CORCHETEDER igualacion resultado'''
+
+def p_lista_definicionesJ(t):
+    '''lista_definiciones       : llamada CORCHETEIZQ expresion CORCHETEDER igualacion resultado'''
+
+def p_lista_definicionesK(t):
+    '''lista_definiciones       : llamada CORCHETEIZQ CORCHETEDER CORCHETEIZQ CORCHETEDER igualacion RESULTADO'''
+
+def p_lista_definicionesL(t):
+    '''lista_definiciones       : llamada CORCHETEIZQ expresion CORCHETEDER CORCHETEIZQ expresion CORCHETEDER igualacion resultado'''
+
+#--------------------------------------------------------------------------------------------
+# METODOS PARA LAS ASIGNACIONES 
+def p_asignacionA(t):
+    '''asignacion       : llamada igualacion resultado'''
+
+def p_asignacionB(t):
+    '''asignacion       : AMPERSAN llamada igualacion RESULTADO'''
+
+def p_asignacionC(t):
+    '''asignacion       : llamada CORCHETEIZQ CORCHETEDER igualacion resultado'''
+
+def p_asignacionD(t):
+    '''asignacion       : llamada CORCHETEIZQ expresion CORCHETEDER igualacion resultado'''
+
+def p_asignacionE(t):
+    '''asignacion       : llamada CORCHETEIZQ CORCHETEDER CORCHETEIZQ CORCHETEDER igualacion RESULTADO'''
+
+def p_asignacionF(t):
+    '''asignacion       : llamada CORCHETEIZQ expresion CORCHETEDER CORCHETEIZQ expresion CORCHETEDER igualacion resultado'''
+
+#-----------------------------------------------------------------------------------------------------
+# METODOS DE RESULTADOS
+def p_resultadoA(t):
+    '''resultado       : expresion'''
+
+def p_resultadoB(t):
+    '''resultado       : AMPERSAN llamada'''
+
+def p_resultadoC(t):
+    '''resultado       : llamada CORCHETEIZQ CORCHETEDER'''
+
+def p_resultadoD(t):
+    '''resultado       : llamada CORCHETEIZQ expresion CORCHETEDER'''
+
+def p_resultadoE(t):
+    '''resultado       : llamada CORCHETEIZQ CORCHETEDER CORCHETEIZQ CORCHETEDER'''
+
+def p_resultadoF(t):
+    '''resultado       : llamada CORCHETEIZQ expresion CORCHETEDER CORCHETEIZQ expresion CORCHETEDER'''
+
+def p_resultadoG(t):
+    '''resultado       : LLAVEIZQ  lista_finales LLAVEDER'''
+
+def p_resultadoH(t):
+    '''resultado       : llamada_metodo'''
+
+def p_llamada_metodoA(t):
+    'llamada_metodo         : ID PARIZQUIERDO PARDERECHO'
+
+def p_llamada_metodoB(t):
+    'llamada_metodo         : ID PARIZQUIERDO parametros PARDERECHO'
+
+#-----------------------------------------------------------------------------------------
+# METODOS DE LOS PARAMETROS
+def p_parametrosA(t):
+    'parametros             : parametros COMA tipo ID'
+
+def p_parametrosB(t):
+    'parametros             : parametros COMA  expresion'
+
+def p_parametrosC(t):
+    'parametros             : parametros COMA AMPERSAN ID'
+
+def p_parametrosD(t):
+    'parametros             : tipo ID'
+
+def p_parametrosE(t):
+    'parametros             : parametros COMA  expresion'
+
+def p_parametrosF(t):
+    'parametros             : parametros COMA AMPERSAN ID'
+
+#--------------------------------------------------------------------------------------
+def p_lista_finales(t):
+    'lista_finales          : lista_finales COMA expresion'
+
+def p_lista_finalesB(t):
+    'lista_finales          : expresion'
+
+def p_funcionesA(t):
+    'funciones              : tipo ID PARIZQUIERDO PARDERECHO LLAVEIZQ instrucciones LLAVEDER'
+
+def p_funcionesB(t):
+    'funciones              : tipo ID PARIZQUIERDO parametros PARDERECHO LLAVEIZQ instrucciones LLAVEDER'
 
 
+def p_expresionA(t):
+    '''expresion            : expresion AND expresion
+                            | expresion OR expresion
+                            | expresion AND2 expresion
+                            | expresion OR2 expresion
+                            | expresion XOR2 expresion
+                            | expresion IGUALIGUAL expresion
+                            | expresion DIFERENTE expresion
+                            | expresion MAYORIGUAL expresion
+                            | expresion MENORIGUAL expresion
+                            | expresion MAYOR expresion
+                            | expresion MENOR expresion
+                            | expresion DESPLAZAMIENTOIZQ expresion
+                            | expresion DESPLAZAMIENTODER expresion
+                            | expresion MAS expresion
+                            | expresion MENOS expresion
+                            | expresion POR expresion
+                            | expresion DIV expresion
+                            | expresion RESIDUO expresion'''
+
+def p_expresionB(t):
+    'expresion              : MENOS expresion %prec UMENOS'
+
+def p_expresionC(t):
+    'expresion              : NOT expresion'
+
+def p_expresionD(t):
+    'expresion              : NOT2 expresion'
+
+def p_expresionE(t):
+    '''expresion              : expresion INCREMENTO
+                              | expresion DECREMENTO '''
+
+def p_expresionF(t):
+    '''expresion              : INCREMENTO expresion
+                              | DECREMENTO expresion'''
+
+def p_expresionG(t):
+    '''expresion              : PARIZQUIERDO expresion PARDERECHO '''
+
+def p_expresionH(t):
+    '''expresion                : ENTERO
+                                | DECIMAL'''
+def p_expresionI(t):
+    'expresion                : ID'
+
+def p_expresionJ(t):
+    'expresion                : CADENA'
+
+def p_expresionK(t):
+    'expresion                : CARACTER'
 
 def p_tipo(t):
     '''tipo             : INT
@@ -317,9 +488,24 @@ def p_tipo(t):
                         | FLOAT
                         | VOID'''
 
+def p_llamada(t):
+    'llamada            : llamada PUNTO ID'
 
+def p_llamadaB(t):
+    'llamada            : ID'
 
-
+def p_igualacion(t):
+    '''igualacion           : IGUAL
+                            | MASIGUAL
+                            | MENOSIGUAL
+                            | DIVIDIDOIGUAL
+                            | PORIGUAL
+                            | RESIDUOIGUAL
+                            | DESPLAZAMIENTOIZQ2
+                            | DESPLAZAMIENTODER2
+                            | ANDIGUAL
+                            | XORIGUAL
+                            | ORIGUAL'''
 
 
 #para manejar los errores sintacticos
